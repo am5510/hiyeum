@@ -1,0 +1,38 @@
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+model BorrowRequest {
+  id          Int      @id @default(autoincrement())
+  service     String
+  equipment   String
+  project     String?
+  username    String
+  department  String
+  contact     String
+  lineId      String?
+  usageDate   DateTime
+  endDate     DateTime?
+  usageTime   String?
+  location    String
+  details     String?
+  attachFile  String?
+  status      String   @default("pending")
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+}
+
+model Service {
+  id        String   @id
+  name      String
+  image     String?
+  order     Int      @default(0)
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+}
