@@ -8,7 +8,7 @@ const notoSansThai = Noto_Sans_Thai({
 });
 
 export const metadata: Metadata = {
-  title: "Hi Yeum by SADI Techno",
+  title: "2Borrow by SADI Techno",
   description: "SADI Techno",
 };
 

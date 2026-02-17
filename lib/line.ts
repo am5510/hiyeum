@@ -1,9 +1,13 @@
 
 export const sendLineNotification = async (message: string) => {
     const LINE_CHANNEL_ACCESS_TOKEN = process.env.LINE_CHANNEL_ACCESS_TOKEN;
-    const LINE_USER_ID = process.env.LINE_USER_ID; // Can be User ID or Group ID
+    const LINE_USER_ID = process.env.LINE_USER_ID;
+    const LINE_GROUP_ID = process.env.LINE_GROUP_ID;
 
-    if (!LINE_CHANNEL_ACCESS_TOKEN || !LINE_USER_ID) {
+    // Use Group ID if available, otherwise fallback to User ID
+    const targetId = LINE_GROUP_ID || LINE_USER_ID;
+
+    if (!LINE_CHANNEL_ACCESS_TOKEN || !targetId) {
         console.warn("LINE notification skipped: Missing credentials.");
         return;
     }
@@ -16,7 +20,7 @@ export const sendLineNotification = async (message: string) => {
                 Authorization: `Bearer ${LINE_CHANNEL_ACCESS_TOKEN}`,
             },
             body: JSON.stringify({
-                to: LINE_USER_ID,
+                to: targetId,
                 messages: [
                     {
                         type: "text",
@@ -40,8 +44,12 @@ export const sendLineNotification = async (message: string) => {
 export const sendLineFlexMessage = async (request: any) => {
     const LINE_CHANNEL_ACCESS_TOKEN = process.env.LINE_CHANNEL_ACCESS_TOKEN;
     const LINE_USER_ID = process.env.LINE_USER_ID;
+    const LINE_GROUP_ID = process.env.LINE_GROUP_ID;
 
-    if (!LINE_CHANNEL_ACCESS_TOKEN || !LINE_USER_ID) {
+    // Use Group ID if available, otherwise fallback to User ID
+    const targetId = LINE_GROUP_ID || LINE_USER_ID;
+
+    if (!LINE_CHANNEL_ACCESS_TOKEN || !targetId) {
         console.warn("LINE notification skipped: Missing credentials.");
         return;
     }
@@ -57,7 +65,7 @@ export const sendLineFlexMessage = async (request: any) => {
                 contents: [
                     {
                         type: "text",
-                        text: "Hi Yeum",
+                        text: "คำขอใช้บริการ",
                         color: "#ffffff",
                         weight: "bold",
                         size: "xl"
@@ -179,7 +187,7 @@ export const sendLineFlexMessage = async (request: any) => {
                 Authorization: `Bearer ${LINE_CHANNEL_ACCESS_TOKEN}`,
             },
             body: JSON.stringify({
-                to: LINE_USER_ID,
+                to: targetId,
                 messages: [flexMessage],
             }),
         });

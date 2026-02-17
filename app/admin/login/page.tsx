@@ -31,8 +31,8 @@ export default function AdminLogin() {
     };
 
     return (
-        <div className="min-h-screen flex items-center justify-center bg-gradient-to-br from-[#0070f3] via-[#50e3c2] to-[#ffcc00]">
-            <div className="w-96 flex flex-col items-center">
+        <div className="min-h-screen flex items-center justify-center bg-gradient-to-br from-[#0070f3] via-[#50e3c2] to-[#ffcc00] px-4">
+            <div className="w-full max-w-sm flex flex-col items-center">
                 {/* eslint-disable-next-line @next/next/no-img-element */}
                 <img
                     src="/hiyeum-logo.png"

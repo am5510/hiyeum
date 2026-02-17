@@ -1,12 +1,18 @@
 import { prisma } from "@/lib/prisma";
 import Link from "next/link";
+import Image from "next/image";
 
-export const dynamic = "force-dynamic";
+export const revalidate = 3600;
 
 export default async function Home() {
   const services = await prisma.service.findMany({
     orderBy: { order: "asc" },
   });
+
+  const logoConfig = await prisma.systemConfig.findUnique({
+    where: { key: "site_logo" },
+  });
+  const logoUrl = logoConfig?.value || "/hiyeum-logo.png";
 
   return (
     <div className="min-h-screen bg-gradient-to-br from-[#0070f3] via-[#50e3c2] to-[#ffcc00] flex flex-col items-center pt-[10px] md:pt-20 font-sans p-8">
@@ -14,10 +20,13 @@ export default async function Home() {
       <div className="mb-8 flex flex-col items-center drop-shadow-2xl">
         <Link href="/" className="mb-[5px]">
           {/* eslint-disable-next-line @next/next/no-img-element */}
-          <img
-            src="/hiyeum-logo.png"
+          <Image
+            src={logoUrl}
             alt="Hi YEUM Logo"
+            width={300}
+            height={160}
             className="h-40 w-auto object-contain hover:scale-105 transition-transform duration-300"
+            priority
           />
         </Link>
         <h1 className="text-2xl font-bold text-white tracking-wide text-center">
@@ -35,12 +44,14 @@ export default async function Home() {
           >
             <div className="flex flex-col h-full bg-white/90 backdrop-blur-sm rounded-xl overflow-hidden shadow-lg transition-transform hover:-translate-y-1 duration-300 hover:shadow-2xl">
               {/* Image Placeholder */}
-              <div className="aspect-square bg-gray-300/50 flex items-center justify-center overflow-hidden">
+              <div className="aspect-square bg-gray-300/50 relative flex items-center justify-center overflow-hidden">
                 {service.image ? (
-                  <img
+                  <Image
                     src={service.image}
                     alt={service.name}
-                    className="w-full h-full object-cover"
+                    fill
+                    className="object-cover"
+                    sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 25vw"
                   />
                 ) : (
                   <span className="text-gray-500 text-5xl font-bold">Pic</span>

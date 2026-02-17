@@ -17,6 +17,11 @@ export default async function BorrowPage(props: { params: Promise<{ id: string }
 
     const serviceName = service.name;
 
+    const logoConfig = await prisma.systemConfig.findUnique({
+        where: { key: "site_logo" },
+    });
+    const logoUrl = logoConfig?.value || "/hiyeum-logo.png";
+
     return (
         <div className="min-h-screen bg-white flex flex-col font-sans">
             {/* Header */}
@@ -25,7 +30,7 @@ export default async function BorrowPage(props: { params: Promise<{ id: string }
                 <Link href="/" className="absolute top-4 left-4 md:left-12 z-10 group">
                     {/* eslint-disable-next-line @next/next/no-img-element */}
                     <img
-                        src="/hiyeum-logo.png"
+                        src={logoUrl}
                         alt="Hi YEUM Logo"
                         className="h-24 w-auto object-contain drop-shadow-lg group-hover:scale-105 transition-transform duration-300"
                     />
