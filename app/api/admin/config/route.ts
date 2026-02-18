@@ -1,8 +1,9 @@
 
 import { NextRequest, NextResponse } from "next/server";
+import { revalidatePath } from "next/cache";
 import { prisma } from "@/lib/prisma";
 
-export const revalidate = 3600;
+export const dynamic = 'force-dynamic';
 
 export async function GET(req: NextRequest) {
     try {
@@ -36,6 +37,10 @@ export async function POST(req: NextRequest) {
         }
 
         await Promise.all(updates);
+
+        revalidatePath('/', 'page');
+        revalidatePath('/admin', 'page');
+        revalidatePath('/admin/settings', 'page');
 
         return NextResponse.json({ success: true });
     } catch (error) {

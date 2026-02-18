@@ -2,7 +2,7 @@ import { prisma } from "@/lib/prisma";
 import Link from "next/link";
 import Image from "next/image";
 
-export const revalidate = 3600;
+// export const revalidate = 3600;
 
 export default async function Home() {
   const services = await prisma.service.findMany({
