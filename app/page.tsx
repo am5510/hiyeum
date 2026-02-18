@@ -15,7 +15,7 @@ export default async function Home() {
   const logoUrl = logoConfig?.value || "/hiyeum-logo.png";
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-[#0070f3] via-[#50e3c2] to-[#ffcc00] flex flex-col items-center pt-[10px] md:pt-20 font-sans p-8">
+    <div className="min-h-screen bg-gradient-to-br from-[#0070f3] via-[#50e3c2] to-[#ffcc00] flex flex-col items-center pt-10 md:pt-20 font-sans p-8">
       {/* Centered Logo */}
       <div className="mb-8 flex flex-col items-center drop-shadow-2xl">
         <Link href="/" className="mb-[5px]">
@@ -25,7 +25,7 @@ export default async function Home() {
             alt="Hi YEUM Logo"
             width={300}
             height={160}
-            className="h-40 w-auto object-contain hover:scale-105 transition-transform duration-300"
+            className="h-24 md:h-40 w-auto object-contain hover:scale-105 transition-transform duration-300"
             priority
           />
         </Link>

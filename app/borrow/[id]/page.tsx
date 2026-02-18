@@ -34,14 +34,14 @@ export default async function BorrowPage(props: { params: Promise<{ id: string }
     return (
         <div className="min-h-screen bg-white flex flex-col font-sans">
             {/* Header */}
-            <header className="w-full h-32 bg-gradient-to-br from-[#0070f3] via-[#50e3c2] to-[#ffcc00] flex items-center px-4 md:px-12 relative overflow-hidden">
+            <header className="w-full h-20 md:h-32 bg-gradient-to-br from-[#0070f3] via-[#50e3c2] to-[#ffcc00] flex items-center px-4 md:px-12 relative overflow-hidden">
                 {/* Logo Container */}
-                <Link href="/" className="absolute top-4 left-4 md:left-12 z-10 group">
+                <Link href="/" className="absolute top-3 left-3 md:top-4 md:left-12 z-10 group">
                     {/* eslint-disable-next-line @next/next/no-img-element */}
                     <img
                         src={logoUrl}
                         alt="Hi YEUM Logo"
-                        className="h-24 w-auto object-contain drop-shadow-lg group-hover:scale-105 transition-transform duration-300"
+                        className="h-14 md:h-24 w-auto object-contain drop-shadow-lg group-hover:scale-105 transition-transform duration-300"
                     />
                 </Link>
 
