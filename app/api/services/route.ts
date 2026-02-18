@@ -2,6 +2,8 @@
 import { NextResponse } from "next/server";
 import { prisma } from "@/lib/prisma";
 
+export const revalidate = 3600;
+
 // GET: List all services
 export async function GET() {
     try {

@@ -4,6 +4,15 @@ import Link from "next/link";
 import BorrowForm from "./BorrowForm";
 import { prisma } from "@/lib/prisma";
 
+export const revalidate = 3600;
+
+export async function generateStaticParams() {
+    const services = await prisma.service.findMany();
+    return services.map((service) => ({
+        id: service.id,
+    }));
+}
+
 export default async function BorrowPage(props: { params: Promise<{ id: string }> }) {
     const params = await props.params;
 

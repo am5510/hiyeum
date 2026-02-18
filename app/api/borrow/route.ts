@@ -2,6 +2,8 @@ import { NextResponse } from "next/server";
 import { prisma } from "@/lib/prisma";
 import { sendLineNotification, sendLineFlexMessage } from "@/lib/line";
 
+export const revalidate = 60;
+
 // GET: Fetch all borrow requests
 export async function GET() {
     try {
