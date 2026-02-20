@@ -267,8 +267,34 @@ export default function RequestTable({ requests }: { requests: BorrowRequest[] }
         { value: "returned", label: "คืนแล้ว", className: "bg-pink-100 text-pink-800" },
     ];
 
+    const [searchTerm, setSearchTerm] = useState("");
+
+    const filteredRequests = requestList.filter((req) => {
+        const term = searchTerm.toLowerCase();
+        return (
+            req.equipment.toLowerCase().includes(term) ||
+            req.username.toLowerCase().includes(term)
+        );
+    });
+
     return (
         <div className="bg-white rounded-lg shadow overflow-hidden">
+            <div className="p-4 border-b border-gray-200">
+                <div className="relative max-w-md">
+                    <div className="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
+                        <svg className="h-5 w-5 text-gray-400" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" />
+                        </svg>
+                    </div>
+                    <input
+                        type="text"
+                        placeholder="ค้นหาด้วยชื่ออุปกรณ์ หรือ ผู้ขอใช้..."
+                        className="block w-full pl-10 pr-3 py-2 border border-gray-300 rounded-md leading-5 bg-white placeholder-gray-500 focus:outline-none focus:placeholder-gray-400 focus:ring-1 focus:ring-blue-500 focus:border-blue-500 sm:text-sm"
+                        value={searchTerm}
+                        onChange={(e) => setSearchTerm(e.target.value)}
+                    />
+                </div>
+            </div>
             <div className="overflow-x-auto">
                 <table className="w-full text-left border-collapse">
                     <thead>
@@ -284,14 +310,14 @@ export default function RequestTable({ requests }: { requests: BorrowRequest[] }
                         </tr>
                     </thead>
                     <tbody>
-                        {requests.length === 0 ? (
+                        {filteredRequests.length === 0 ? (
                             <tr>
                                 <td colSpan={8} className="p-8 text-center text-gray-500">
                                     ไม่มีข้อมูลการยืม
                                 </td>
                             </tr>
                         ) : (
-                            requestList.map((req) => (
+                            filteredRequests.map((req) => (
                                 <tr key={req.id} className="border-b border-gray-100 hover:bg-gray-50 text-black transition-colors">
                                     <td className="p-4 text-gray-500">#{req.id}</td>
                                     <td className="p-4">{req.service}</td>
