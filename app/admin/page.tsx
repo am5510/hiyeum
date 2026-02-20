@@ -5,6 +5,7 @@ import AdminMenu from "./AdminMenu";
 import { Suspense } from "react";
 
 // export const revalidate = 60;
+export const dynamic = 'force-dynamic';
 
 export default async function AdminPage() {
     const requests = await prisma.borrowRequest.findMany({
