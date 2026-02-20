@@ -119,7 +119,8 @@ export async function DELETE(request: Request) {
             return NextResponse.json({ error: "Missing id parameter" }, { status: 400 });
         }
 
-        await prisma.borrowRequest.delete({
+        // Use deleteMany so it doesn't throw if the record is missing
+        await prisma.borrowRequest.deleteMany({
             where: { id: Number(id) },
         });
 
