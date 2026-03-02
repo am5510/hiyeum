@@ -98,6 +98,15 @@ export const sendLineFlexMessage = async (request: any) => {
                         type: "box",
                         layout: "horizontal",
                         contents: [
+                            { type: "text", text: "รูปแบบ/อุปกรณ์", size: "sm", color: "#555555", flex: 2, weight: "bold" },
+                            { type: "text", text: request.equipment, size: "sm", color: "#111111", flex: 4, wrap: true }
+                        ],
+                        margin: "md"
+                    },
+                    {
+                        type: "box",
+                        layout: "horizontal",
+                        contents: [
                             { type: "text", text: "ผู้ขอ", size: "sm", color: "#555555", flex: 2, weight: "bold" },
                             { type: "text", text: request.username, size: "sm", color: "#111111", flex: 4, wrap: true }
                         ],
