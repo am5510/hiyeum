@@ -319,7 +319,7 @@ export default function RequestTable({ requests }: { requests: BorrowRequest[] }
                         ) : (
                             filteredRequests.map((req) => (
                                 <tr key={req.id} className="border-b border-gray-100 hover:bg-gray-50 text-black transition-colors">
-                                    <td className="p-4 text-gray-500">#{req.id}</td>
+                                    <td className="p-4 text-gray-500">{req.id}</td>
                                     <td className="p-4">{req.service}</td>
                                     <td className="p-4">{req.equipment}</td>
                                     <td className="p-4">
@@ -501,7 +501,7 @@ export default function RequestTable({ requests }: { requests: BorrowRequest[] }
                     <div className="bg-white rounded-xl shadow-2xl w-full max-w-2xl overflow-hidden animate-in zoom-in-95 duration-200">
                         {/* Header */}
                         <div className="bg-gray-50 px-6 py-4 border-b border-gray-100 flex justify-between items-center">
-                            <h3 className="text-xl font-bold text-gray-800">รายละเอียดคำขอ #{selectedRequest.id}</h3>
+                            <h3 className="text-xl font-bold text-gray-800">รายละเอียดคำขอ {selectedRequest.id}</h3>
                             <button
                                 onClick={() => setSelectedRequest(null)}
                                 className="text-gray-400 hover:text-gray-600 transition-colors p-1 rounded-full hover:bg-gray-200"
